@@ -7,6 +7,8 @@ import SearchBar from './SearchBar';
 import IEX from './api/IEX';
 import SearchResults from './SearchResults';
 import EmptyState from './EmptyState';
+import Sidebar from './Sidebar';
+import Routes from './constants/Routes';
 
 library.add(faMoneyBillWave);
 
@@ -18,16 +20,16 @@ class App extends React.Component {
 			allStocks: [],
 			searchResults: [],
 			searchBarValue: '',
-			emptyStateVisible: true,
+			page: window.location.pathname,
 		}
 	}
 
 	componentDidMount() {
-		IEX.getAllStocks().then(response => {
-			this.setState({
-				allStocks: response.data,
-			});
-		});
+		// IEX.getAllStocks().then(response => {
+		// 	this.setState({
+		// 		allStocks: response.data,
+		// 	});
+		// });
 	}
 
 	handleSearchBarChange(event) {
@@ -65,14 +67,20 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<Header />
-				<SearchBar value={this.state.searchBarValue} handleChange={this.handleSearchBarChange.bind(this)} />
-				
-				{ this.state.searchResults.length > 0 ? (
-					<SearchResults results={this.state.searchResults} />
-				) : (
-					<EmptyState visible={this.state.emptyStateVisible} />
-				)}
+				<Sidebar />
+				<div className="Content">
+					{/* <SearchBar value={this.state.searchBarValue} handleChange={this.handleSearchBarChange.bind(this)} /> */}
+
+					{ this.state.page === '/' ? (
+						<EmptyState />
+					) : (
+						<div>{this.state.page}</div>
+					)}
+					{/* { this.state.searchResults.length > 0 ? (
+						<SearchResults results={this.state.searchResults} />
+					) : (
+					)} */}
+				</div>
 			</div>
 		);
 	}
