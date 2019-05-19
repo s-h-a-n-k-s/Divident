@@ -7,7 +7,7 @@ export default function Header(props) {
 		<div className="Header">
 			<FontAwesomeIcon icon="money-bill-wave" className="Image" />
 			<br />
-			<span className="Text">Divident</span>
+			<span className="Text">DIVIDENT</span>
 		</div>
 	);
 }
