@@ -8,6 +8,9 @@ import SearchResults from './SearchResults';
 import EmptyState from './EmptyState';
 import Sidebar from './Sidebar';
 import Routes from './constants/Routes';
+import Dashboard from './pages/Dashboard';
+import AddStocks from './pages/AddStocks';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 library.add(faMoneyBillWave);
 
@@ -17,70 +20,30 @@ class App extends React.Component {
 
 		this.state = {
 			allStocks: [],
-			searchResults: [],
-			searchBarValue: '',
+			userStocks: [],
 			page: window.location.pathname,
 		}
 	}
 
 	componentDidMount() {
-		// IEX.getAllStocks().then(response => {
-		// 	this.setState({
-		// 		allStocks: response.data,
-		// 	});
-		// });
-	}
-
-	handleSearchBarChange(event) {
-		this.setState({
-			searchBarValue: event.target.value,
-		});
-
-		if (event.target.value.length > 2) {
-			if (this.state.emptyStateVisible) {
-				this.handleToggleEmptyState();
-			}
-
-			const searchResults = IEX.search(this.state.allStocks, event.target.value);
-
+		IEX.getAllStocks().then(response => {
 			this.setState({
-				searchResults: searchResults,
+				allStocks: response.data,
 			});
-		} else {
-			this.setState({
-				searchResults: [],
-			});
-
-			if (!this.state.emptyStateVisible) {
-				this.handleToggleEmptyState();
-			}
-		}
-	}
-
-	handleToggleEmptyState() {
-		this.setState({
-			emptyStateVisible: !this.state.emptyStateVisible,
 		});
 	}
 
 	render() {
 		return (
-			<div className="App">
-				<Sidebar />
-				<div className="Content">
-					{/* <SearchBar value={this.state.searchBarValue} handleChange={this.handleSearchBarChange.bind(this)} /> */}
-
-					{ this.state.page === '/' ? (
-						<EmptyState />
-					) : (
-						<div>{this.state.page}</div>
-					)}
-					{/* { this.state.searchResults.length > 0 ? (
-						<SearchResults results={this.state.searchResults} />
-					) : (
-					)} */}
+			<Router>
+				<div className="App">
+					<Sidebar />
+					<div className="Content">
+						<Route path="/" exact render={props => <Dashboard {...props} userStocks={this.state.userStocks} />} />
+						<Route path="/add-stocks" render={props => <AddStocks {...props} stocks={this.state.allStocks} />} />
+					</div>
 				</div>
-			</div>
+			</Router>
 		);
 	}
 }

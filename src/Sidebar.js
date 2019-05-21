@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Routes from './constants/Routes';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default function Sidebar(props) {
 	return (
@@ -14,7 +15,7 @@ export default function Sidebar(props) {
 			<div className="Content">
 				<ul className="MenuItem">
 					{Routes.pages.map(value => {
-						return <li><a href={value.url}>{value.name}</a></li>
+						return <li><Link to={value.url}>{value.name}</Link></li>
 					})}
 				</ul>
 			</div>
