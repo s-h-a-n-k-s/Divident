@@ -23,6 +23,7 @@
 }
 
 .Sidebar .Content {
+	width: 100%;
 	margin-top: 2em;
 }
 
@@ -39,6 +40,10 @@
 .Sidebar .MenuItem li a {
 	text-decoration: none;
 	color: #FFFFFF;
+}
+
+.Content {
+	width: 100%;
 }
 
 .Search {
@@ -59,8 +64,8 @@
 
 .SearchResults {
 	margin-top: 1em;
-	margin-left: 5%;
-	margin-right: 5%;
+	/* margin-left: 5%;
+	margin-right: 5%; */
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -92,6 +97,7 @@
 	flex: 1;
 	align-self: center;
 	justify-self: flex-end;
+	font-weight: 600;
 }
 
 .EmptyState {
@@ -120,4 +126,5 @@
 	padding: 1em;
 	border: 0px;
 	font-size: 1em;
+	cursor: pointer;
 }
