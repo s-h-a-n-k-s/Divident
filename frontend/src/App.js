@@ -16,6 +16,7 @@ import AddStockPrice from './pages/AddStockPrice';
 import AddStockDate from './pages/AddStockDate';
 import AddStockOverview from './pages/AddStockOverview';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Database from './api/Database';
 
 library.add(faMoneyBillWave, faIndustry, faLink, faUserTie);
 
@@ -35,6 +36,13 @@ class App extends React.Component {
 			this.setState({
 				allStocks: response.data,
 			});
+		});
+
+		Database.getAllStocks().then(response => {
+			this.setState({
+				userStocks: response.data,
+			});
+			console.log(JSON.stringify(response.data));
 		});
 	}
 

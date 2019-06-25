@@ -12,6 +12,14 @@ class Dashboard extends React.Component {
 			return (
 				<EmptyState />
 			);
+		} else {
+			return (
+				<div>
+					{this.props.userStocks.map((item) => {
+						return <div>{item.companyName}</div>
+					})}
+				</div>	
+			)
 		}
 	}
 }

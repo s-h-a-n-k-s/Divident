@@ -5,6 +5,8 @@ const TOKEN = 'sk_6a960a4c21544875a2ea47259e86997b';
 const API_STOCK_LOGO = (symbol) => `https://storage.googleapis.com/iex/api/logos/${symbol}.png`;
 const API_STOCK = (symbol) => `${CLOUD_ROUTE}/stock/${symbol}/company?token=${TOKEN}`;
 const API_DIVIDENDS = (symbol) => `${CLOUD_ROUTE}/stock/${symbol}/dividends/5y?token=${TOKEN}`;
+const DATABSE_ROUTE = 'http://localhost:8080';
+const DATABASE_ALL_STOCKS = `${DATABSE_ROUTE}/stocks`;
 
 const pages = [
 	{name: 'Dashboard', url: '/'},
@@ -17,5 +19,6 @@ export default {
 	API_STOCK_LOGO,
 	API_STOCK,
 	API_DIVIDENDS,
-	pages
+	pages,
+	DATABASE_ALL_STOCKS
 }
