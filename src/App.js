@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyBillWave, faIndustry, faLink, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import SearchBar from './SearchBar';
 import IEX from './api/IEX';
 import SearchResults from './SearchResults';
@@ -9,10 +9,15 @@ import EmptyState from './EmptyState';
 import Sidebar from './Sidebar';
 import Routes from './constants/Routes';
 import Dashboard from './pages/Dashboard';
-import AddStocks from './pages/AddStocks';
+import Search from './pages/Search';
+import Stock from './pages/Stock';
+import AddStockAmount from './pages/AddStockAmount';
+import AddStockPrice from './pages/AddStockPrice';
+import AddStockDate from './pages/AddStockDate';
+import AddStockOverview from './pages/AddStockOverview';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-library.add(faMoneyBillWave);
+library.add(faMoneyBillWave, faIndustry, faLink, faUserTie);
 
 class App extends React.Component {
 	constructor(props) {
@@ -40,7 +45,12 @@ class App extends React.Component {
 					<Sidebar />
 					<div className="Content">
 						<Route path="/" exact render={props => <Dashboard {...props} userStocks={this.state.userStocks} />} />
-						<Route path="/add-stocks" render={props => <AddStocks {...props} stocks={this.state.allStocks} />} />
+						<Route path="/search" render={props => <Search {...props} stocks={this.state.allStocks} />} />
+						<Route path="/stock/:symbol" render={props => <Stock {...props} stocks={this.state.allStocks} />} />
+						<Route path="/add-stock/:symbol" render={props => <AddStockAmount {...props} stocks={this.state.allStocks} />} />
+						<Route path="/add-stock-price/:symbol" render={props => <AddStockPrice {...props} stocks={this.state.allStocks} />} />
+						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} />} />
+						<Route path="/add-stock-overview/:symbol" render={props => <AddStockOverview {...props} stocks={this.state.allStocks} />} />
 					</div>
 				</div>
 			</Router>

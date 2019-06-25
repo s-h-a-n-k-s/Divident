@@ -12,7 +12,7 @@ export default function Sidebar(props) {
 				<br />
 				<span className="Text">DIVIDENT</span>
 			</div>
-			<div className="Content">
+			<div className="Links">
 				<ul className="MenuItem">
 					{Routes.pages.map(value => {
 						return <li><Link to={value.url}>{value.name}</Link></li>

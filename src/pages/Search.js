@@ -5,7 +5,7 @@ import SearchBar from '../SearchBar';
 import IEX from '../api/IEX';
 import SearchResults from '../SearchResults';
 
-class AddStocks extends React.Component {
+class Search extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -44,4 +44,4 @@ class AddStocks extends React.Component {
 	}
 }
 
-export default AddStocks;
+export default Search;
