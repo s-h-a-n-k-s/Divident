@@ -15,7 +15,7 @@ export default function Sidebar(props) {
 			<div className="Links">
 				<ul className="MenuItem">
 					{Routes.pages.map(value => {
-						return <li><Link to={value.url}>{value.name}</Link></li>
+						return <li key={value.name}><Link to={value.url}>{value.name}</Link></li>
 					})}
 				</ul>
 			</div>
