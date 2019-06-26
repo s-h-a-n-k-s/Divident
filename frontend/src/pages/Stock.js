@@ -6,6 +6,7 @@ import Routes from '../constants/Routes';
 import InvestmentsEmptyState from '../components/InvestmentsEmptyState';
 import DividendsEmptyState from '../components/DividendsEmptyState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Database from '../api/Database';
 
 class Stock extends React.Component {
 	constructor(props) {
@@ -19,18 +20,7 @@ class Stock extends React.Component {
 			website: '',
 			ceo: '',
 			dividends: [],
-			shares: [
-				{
-					id: 1,
-					symbol: 'APPL',
-					company_name: 'Apple, Inc.',
-					amount: 10,
-					purchase_price: 101,
-					purchase_date: '2019-03-03',
-					created_at: '2019-03-03',
-					updated_at: '2019-03-03'
-				}
-			],
+			shares: [],
 		}
 	}
 
@@ -48,6 +38,12 @@ class Stock extends React.Component {
 		IEX.getDividends(this.props.match.params.symbol.toLowerCase()).then(response => {
 			this.setState({
 				dividends: response.data,
+			});
+		});
+
+		Database.getShares(this.props.match.params.symbol).then(response => {
+			this.setState({
+				shares: response,
 			});
 		});
 	}
@@ -90,7 +86,7 @@ class Stock extends React.Component {
 							<p className="Text">{this.state.ceo}</p>
 							</div>
 						</div>					
-					</div>		
+					</div>
 						
 					<div className="Columns">
 						<div className="Column">
@@ -112,15 +108,15 @@ class Stock extends React.Component {
 
 						<div className="Column">
 							<h2 className="Title">Your Investments</h2>
-							{ this.state.shares == 0 ? (
+							{ this.state.shares.length === 0 ? (
 								<InvestmentsEmptyState companyName={this.state.companyName} symbol={this.props.match.params.symbol} logo={Routes.API_STOCK_LOGO(this.props.match.params.symbol)} />
 							) : this.state.shares.map(value => {
 								return (
 									<div className="DividendContainer">
 										<div className="Amount">{value.amount} <small>shares</small></div>
 										<div className="Dates">
-											<div className="PricePaid">Price: £{value.purchase_price} (per share)</div>
-											<div className="PurchaseDate">Purchase date: {value.purchase_date}</div>
+											<div className="PricePaid">Price: £{value.purchasePrice} (per share)</div>
+											<div className="PurchaseDate">Purchase date: {value.purchaseDate}</div>
 										</div>
 									</div>
 								)

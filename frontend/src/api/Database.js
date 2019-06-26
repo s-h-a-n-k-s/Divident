@@ -23,8 +23,16 @@ const addShares = (companyName, tickerSymbol, amount, purchasePrice, purchaseDat
 	return error.response;
 });
 
+const getShares = (tickerSymbol) => axios.get(`http://localhost:8080/shares/${tickerSymbol}`)
+.then(response => {
+	return response.data;
+})
+.catch(error => {
+	return error;
+});
 
 export default {
 	getAllStocks,
-	addShares
+	addShares,
+	getShares
 };

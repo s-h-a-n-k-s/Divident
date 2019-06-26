@@ -25,4 +25,8 @@ public class StockService {
 	public Stock addStock(Stock stock) {
 		return stockRepository.save(stock);
 	}
+
+	public List<Stock> getShares(String symbol) {
+		return stockRepository.findAllByTickerSymbol(symbol);
+	}
 }

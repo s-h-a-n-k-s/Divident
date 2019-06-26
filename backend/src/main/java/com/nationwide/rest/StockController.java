@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,11 @@ public class StockController {
 	@GetMapping(path = Constants.STOCKS)
 	public ResponseEntity<List<Stock>> getStocks() {
 		return ResponseEntity.ok(stockService.getStocks());
+	}
+
+	@GetMapping(path = Constants.SHARES_WITH_PARAM)
+	public ResponseEntity<List<Stock>> getStock(@PathVariable("symbol") String symbol) {
+		return ResponseEntity.ok(stockService.getShares(symbol));
 	}
 
 	@RequestMapping(value = Constants.STOCK, method = RequestMethod.POST)
