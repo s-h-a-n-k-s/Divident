@@ -7,6 +7,7 @@ const API_STOCK = (symbol) => `${CLOUD_ROUTE}/stock/${symbol}/company?token=${TO
 const API_DIVIDENDS = (symbol) => `${CLOUD_ROUTE}/stock/${symbol}/dividends/5y?token=${TOKEN}`;
 const DATABSE_ROUTE = 'http://localhost:8080';
 const DATABASE_ALL_STOCKS = `${DATABSE_ROUTE}/stocks`;
+const DATABASE_STOCK = `${DATABSE_ROUTE}/stock`;
 
 const pages = [
 	{name: 'Dashboard', url: '/'},
@@ -20,5 +21,6 @@ export default {
 	API_STOCK,
 	API_DIVIDENDS,
 	pages,
-	DATABASE_ALL_STOCKS
+	DATABASE_ALL_STOCKS,
+	DATABASE_STOCK
 }

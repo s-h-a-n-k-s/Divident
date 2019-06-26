@@ -4,6 +4,7 @@ import IEX from '../api/IEX';
 import { Link } from 'react-router-dom';
 import Routes from '../constants/Routes';
 import CurrencyInput from 'react-currency-input';
+import Database from '../api/Database';
 
 class AddStockOverview extends React.Component {
 	constructor(props) {
@@ -15,7 +16,6 @@ class AddStockOverview extends React.Component {
 			description: '',
 			dividends: [],
 			logo: '',
-			date: '',
 		}
 	}
 
@@ -25,6 +25,17 @@ class AddStockOverview extends React.Component {
 		this.setState({
 			companyName: companyName,
 			logo: logo,
+		});
+
+		this.addShares = this.addShares.bind(this);
+	}
+
+	addShares() {
+		Database.addShares(this.state.companyName, this.props.match.params.symbol, this.props.location.state.amount, this.props.location.state.price, this.props.location.state.date)
+		.then(response => {
+			if (response.status === 200) {
+				alert("Shares added.");
+			}
 		});
 	}
 
@@ -50,7 +61,7 @@ class AddStockOverview extends React.Component {
 							date: this.state.date,
 						}
 					}}>
-						<button className="CallToAction" style={{marginTop: '2em'}}>Save</button>
+						<button className="CallToAction" onClick={this.addShares} style={{marginTop: '2em'}}>Save</button>
 					</Link>
 				</div>
 			</div>
