@@ -21,6 +21,10 @@ class Stock extends React.Component {
 			ceo: '',
 			dividends: [],
 			shares: [],
+			totalNumberofShares: 0,
+			yearsDividends: 0,
+			dividendPayout: 0,
+			currency: '',
 		}
 	}
 
@@ -36,14 +40,24 @@ class Stock extends React.Component {
 		});
 
 		IEX.getDividends(this.props.match.params.symbol.toLowerCase()).then(response => {
+			const yearsDividends = response.data.filter((dividend) => dividend.exDate.search(new Date().getFullYear()) !== -1);
+			const dividendPayout = (response.data.length > 0) ? yearsDividends.reduce((previousValue, currentValue) => previousValue.amount + currentValue.amount) : 0;
+			const currency = (response.data[0] !== undefined) ? response.data[0].currency : '';
+			
 			this.setState({
 				dividends: response.data,
+				yearsDividends: yearsDividends.length,
+				dividendPayout: dividendPayout,
+				currency: currency,
 			});
 		});
 
 		Database.getShares(this.props.match.params.symbol).then(response => {
+			const totalNumberofShares = (response.length > 0) ? response.reduce((previousValue, currentValue) => previousValue.amount + currentValue.amount) : 0;
+
 			this.setState({
 				shares: response,
+				totalNumberofShares: totalNumberofShares,
 			});
 		});
 	}
@@ -87,6 +101,30 @@ class Stock extends React.Component {
 							</div>
 						</div>					
 					</div>
+					{ this.state.dividends.length > 0 &&
+						<div>
+							<h2 className="Title">Your Statistics</h2>
+							<div className="Statistics">
+								<div>
+									<p>You own</p>
+									<h2>{this.state.totalNumberofShares}</h2>
+									<p>shares in {this.state.companyName}</p>
+								</div>
+
+								<div>
+									<p>You'll earn</p>
+									<h2>{(this.state.dividendPayout * this.state.totalNumberofShares)} {this.state.currency}</h2>
+									<p>this year</p>
+								</div>
+
+								<div>
+									<p>{this.state.companyName} has announced</p>
+									<h2>{this.state.yearsDividends}</h2>
+									<p>dividends this year</p>
+								</div>
+							</div>
+						</div>
+					}
 						
 					<div className="Columns">
 						<div className="Column">
