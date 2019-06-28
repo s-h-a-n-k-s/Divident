@@ -263,3 +263,86 @@ body {
 	display: flex;
 	justify-content: space-around;
 }
+
+.Statistics h2 {
+	font-size: 2.5em;
+    margin: 0.1em;
+}
+
+.Statistics p {
+	margin: 0;
+}
+
+.Statistics .Divider {
+	border-left: 1px solid;
+    border-color: #dfe6e9;
+}
+
+.MonthsContainer {
+	display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.MonthsContainer > .Row {
+	display: flex;
+	flex: 1;
+}
+
+.MonthsContainer > .Row:not(:first-child) {
+	border-top: 1px solid #dfe6e9;
+	margin: 0 1em 1em 1em;
+}
+
+.MonthsContainer > .Row:not(:first-child) .Top {
+	padding-top: 1em;
+}
+
+.MonthsContainer > .Row:first-child {
+	margin: 1em 1em 0em 1em;
+}
+
+.MonthsContainer > .Row > .MonthContainer {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.MonthsContainer > .Row > .MonthContainer:not(:first-child) {
+	border-left: 1px solid #dfe6e9;
+}
+
+.MonthsContainer > .Row > .MonthContainer > .Bottom > .Title {
+	display: flex;
+	align-self: flex-end;
+	color: #2d3436;
+    font-weight: 200;
+}
+
+.MonthContainer .LogoContainer {
+    margin: 1em;
+    background: #FFF;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+
+.MonthContainer .NoDividends {
+    margin: 1em;
+	background: #e74c3c;
+	color: #FFFFFF;
+	text-align: center;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+
+.MonthContainer .LogoContainer .DashboardLogo {
+	width: 3em;
+}
+
+.MonthContainer .Middle {
+	display: flex;
+	flex: 1;
+	align-items: center;
+}

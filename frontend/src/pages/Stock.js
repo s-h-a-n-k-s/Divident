@@ -101,7 +101,7 @@ class Stock extends React.Component {
 							</div>
 						</div>					
 					</div>
-					{ this.state.dividends.length > 0 &&
+					{ this.state.shares.length > 0 &&
 						<div>
 							<h2 className="Title">Your Statistics</h2>
 							<div className="Statistics">
@@ -111,11 +111,15 @@ class Stock extends React.Component {
 									<p>shares in {this.state.companyName}</p>
 								</div>
 
+								<div className="Divider"></div>
+
 								<div>
 									<p>You'll earn</p>
 									<h2>{(this.state.dividendPayout * this.state.totalNumberofShares)} {this.state.currency}</h2>
 									<p>this year</p>
 								</div>
+								
+								<div className="Divider"></div>
 
 								<div>
 									<p>{this.state.companyName} has announced</p>

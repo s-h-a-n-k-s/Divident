@@ -29,9 +29,17 @@ const getDividends = (symbol) => axios.get(routes.API_DIVIDENDS(symbol))
 	return error.response;
 });
 
+const getMultipleCompanyDividends = (symbols) => axios.get(routes.API_MULTIPLE_COMPANY_DIVIDENDS(symbols))
+.then(response => {
+	return response;
+}).catch(error => {
+	return error.response;
+});
+
 export default {
 	getAllStocks,
 	search,
 	getStock,
-	getDividends
+	getDividends,
+	getMultipleCompanyDividends
 };

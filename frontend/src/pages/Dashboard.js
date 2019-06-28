@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import EmptyState from '../EmptyState';
+import Month from '../components/Month';
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -14,11 +15,24 @@ class Dashboard extends React.Component {
 			);
 		} else {
 			return (
-				<div>
-					{this.props.userStocks.map((item) => {
-						return <div>{item.companyName}</div>
-					})}
-				</div>	
+				<div className="MonthsContainer">
+					<div className="Row">
+						<Month dividends={this.props.dividendCalendar[0]} monthName="January" />
+						<Month dividends={this.props.dividendCalendar[1]} monthName="February" />
+						<Month dividends={this.props.dividendCalendar[2]} monthName="March" />
+						<Month dividends={this.props.dividendCalendar[3]} monthName="April" />
+						<Month dividends={this.props.dividendCalendar[4]} monthName="May" />
+						<Month dividends={this.props.dividendCalendar[5]} monthName="June" />
+					</div>
+					<div className="Row">
+						<Month dividends={this.props.dividendCalendar[6]} monthName="July" />
+						<Month dividends={this.props.dividendCalendar[7]} monthName="August" />
+						<Month dividends={this.props.dividendCalendar[8]} monthName="September" />
+						<Month dividends={this.props.dividendCalendar[9]} monthName="October" />
+						<Month dividends={this.props.dividendCalendar[10]} monthName="November" />
+						<Month dividends={this.props.dividendCalendar[11]} monthName="December" />
+					</div>
+				</div>
 			)
 		}
 	}

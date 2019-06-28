@@ -28,7 +28,10 @@ class App extends React.Component {
 			allStocks: [],
 			userStocks: [],
 			page: window.location.pathname,
+			dividendCalendar: Array(12).fill([]),
 		}
+
+		this.getDashboard = this.getDashboard.bind(this);
 	}
 
 	componentDidMount() {
@@ -42,7 +45,42 @@ class App extends React.Component {
 			this.setState({
 				userStocks: response.data,
 			});
-			console.log(JSON.stringify(response.data));
+			
+			this.getDashboard(response.data);
+
+		});
+	}
+
+	getDashboard(userStocks) {
+		const tickerSymbols = userStocks.map((stock) => stock.tickerSymbol).filter((v, i, a) => a.indexOf(v) === i);
+		let dividendCalendar = Array(12).fill([]);
+		console.log('DC', dividendCalendar);
+		IEX.getMultipleCompanyDividends(tickerSymbols.join()).then(response => {
+			for (const item in response.data) {
+				const stock = response.data[item];
+				const yearsDividends = stock.dividends.filter((dividend) => dividend.paymentDate.search(new Date().getFullYear()) !== -1);
+				
+				if (yearsDividends.length > 0) {
+					yearsDividends.forEach((dividend) => {
+						const dividendObject = {companyName: stock.company.companyName, logo: stock.logo.url, paymentDate: dividend.paymentDate, declaredDate: dividend.declaredDate, amount: dividend.amount, currency: dividend.currency};
+						const x = new Date(dividendObject.paymentDate).getMonth();
+						console.log(dividendObject.companyName, dividendObject.declaredDate, dividendObject.paymentDate, x);
+						dividendCalendar[x] = dividendCalendar[x].concat([dividendObject]);
+						// var newarray=new Array();
+						// 	newarray.push(dividendCalendar[x]);
+						// 	mewarrya.push("treee");
+
+						//dividendCalendar[x].push(dividendObject);
+						// dividendCalendar[x]=newarray;
+					});
+				}
+			}
+
+			console.log(dividendCalendar);
+
+			this.setState({
+				dividendCalendar: dividendCalendar
+			});
 		});
 	}
 
@@ -52,7 +90,7 @@ class App extends React.Component {
 				<div className="App">
 					<Sidebar />
 					<div className="Content">
-						<Route path="/" exact render={props => <Dashboard {...props} userStocks={this.state.userStocks} />} />
+						<Route path="/" exact render={props => <Dashboard {...props} userStocks={this.state.userStocks} dividendCalendar={this.state.dividendCalendar} />} />
 						<Route path="/search" render={props => <Search {...props} stocks={this.state.allStocks} />} />
 						<Route path="/stock/:symbol" render={props => <Stock {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock/:symbol" render={props => <AddStockAmount {...props} stocks={this.state.allStocks} />} />
