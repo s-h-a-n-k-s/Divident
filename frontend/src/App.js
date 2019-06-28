@@ -29,6 +29,7 @@ class App extends React.Component {
 			userStocks: [],
 			page: window.location.pathname,
 			dividendCalendar: Array(12).fill([]),
+			totalDividendPayout: 0,
 		}
 
 		this.getDashboard = this.getDashboard.bind(this);
@@ -54,7 +55,7 @@ class App extends React.Component {
 	getDashboard(userStocks) {
 		const tickerSymbols = userStocks.map((stock) => stock.tickerSymbol).filter((v, i, a) => a.indexOf(v) === i);
 		let dividendCalendar = Array(12).fill([]);
-		console.log('DC', dividendCalendar);
+		let totalDividendPayout = 0;
 		IEX.getMultipleCompanyDividends(tickerSymbols.join()).then(response => {
 			for (const item in response.data) {
 				const stock = response.data[item];
@@ -66,20 +67,18 @@ class App extends React.Component {
 						const x = new Date(dividendObject.paymentDate).getMonth();
 						console.log(dividendObject.companyName, dividendObject.declaredDate, dividendObject.paymentDate, x);
 						dividendCalendar[x] = dividendCalendar[x].concat([dividendObject]);
-						// var newarray=new Array();
-						// 	newarray.push(dividendCalendar[x]);
-						// 	mewarrya.push("treee");
-
-						//dividendCalendar[x].push(dividendObject);
-						// dividendCalendar[x]=newarray;
+						
+						const shares = userStocks.filter(value => value.tickerSymbol.toLowerCase().search(item.toLowerCase()) !== -1);
+						shares.forEach(share => totalDividendPayout += (share.amount * dividend.amount));
 					});
 				}
 			}
 
-			console.log(dividendCalendar);
+			console.log('TDP', totalDividendPayout);
 
 			this.setState({
-				dividendCalendar: dividendCalendar
+				dividendCalendar: dividendCalendar,
+				totalDividendPayout: totalDividendPayout
 			});
 		});
 	}
@@ -90,7 +89,7 @@ class App extends React.Component {
 				<div className="App">
 					<Sidebar />
 					<div className="Content">
-						<Route path="/" exact render={props => <Dashboard {...props} userStocks={this.state.userStocks} dividendCalendar={this.state.dividendCalendar} />} />
+						<Route path="/" exact render={props => <Dashboard {...props} userStocks={this.state.userStocks} dividendCalendar={this.state.dividendCalendar} totalDividendPayout={this.state.totalDividendPayout} />} />
 						<Route path="/search" render={props => <Search {...props} stocks={this.state.allStocks} />} />
 						<Route path="/stock/:symbol" render={props => <Stock {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock/:symbol" render={props => <AddStockAmount {...props} stocks={this.state.allStocks} />} />
