@@ -300,6 +300,9 @@ body {
 	margin: 0 1em 1em 1em;
 }
 
+.MonthsContainer > .Row > .MonthContainer > .Top > .DividendCount {
+	font-size: 0.75em;
+}
 .MonthsContainer > .Row:not(:first-child) .Top {
 	padding-top: 1em;
 }
@@ -323,7 +326,7 @@ body {
 .MonthsContainer > .Row > .MonthContainer > .Bottom > .Title {
 	display: flex;
 	align-self: flex-end;
-	color: #2d3436;
+	color: #27AE60;
 	font-weight: 200;
 	font-size: 1.25em;
 }
@@ -337,11 +340,12 @@ body {
 
 .MonthContainer .NoDividends {
     margin: 1em;
-	background: #e74c3c;
+	background: #3d3d3d;
 	color: #FFFFFF;
 	text-align: center;
     border-radius: 1em;
-    padding: 0.5em;
+	padding: 0.5em;
+	font-weight: 200;
 }
 
 .MonthContainer .LogoContainer .DashboardLogo {
@@ -366,11 +370,11 @@ body {
 
 .TotalPayoutContainer .TotalPayout {
 	font-size: 5em;
-	color: #27AE60;
+	color: #2d3436;
 }
 
 .TotalPayoutContainer .Year {
 	align-self: flex-end;
-    color: #2d3436;
+	color: #27AE60;
 	margin-bottom: 0.7em;
 }
