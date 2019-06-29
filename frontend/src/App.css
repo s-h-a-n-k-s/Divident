@@ -378,3 +378,9 @@ body {
 	color: #27AE60;
 	margin-bottom: 0.7em;
 }
+
+.MonthContainer .Bottom {
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+}

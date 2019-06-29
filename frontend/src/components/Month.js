@@ -19,6 +19,9 @@ export default function Month(props) {
 			)}
 			</div>
 			<div className="Bottom">
+				{props.dividends.map((dividend) => dividend.sharesCount * dividend.amount).join("") !== '' &&
+					<div className="Total">£{props.dividends.map((dividend) => dividend.sharesCount * dividend.amount).join("")}</div>
+				}
 				<p className="Title">{props.monthName.toUpperCase()}</p>
 			</div>
 		</div>
