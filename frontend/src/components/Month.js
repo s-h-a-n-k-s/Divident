@@ -20,7 +20,7 @@ export default function Month(props) {
 			</div>
 			<div className="Bottom">
 				{props.dividends.map((dividend) => dividend.sharesCount * dividend.amount).join("") !== '' &&
-					<div className="Total">£{Number.parseFloat(props.dividends.map((dividend) => dividend.sharesCount * dividend.amount).join("")).toFixed(2)}</div>
+					<div className="Total">£{Number.parseFloat(props.dividends.map((dividend) => dividend.sharesCount * dividend.amount).reduce((previousValue, currentValue) => previousValue + currentValue, 0)).toFixed(2)}</div>
 				}
 				<p className="Title">{props.monthName.toUpperCase()}</p>
 			</div>
