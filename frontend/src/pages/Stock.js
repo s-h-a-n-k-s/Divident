@@ -41,7 +41,7 @@ class Stock extends React.Component {
 
 		IEX.getDividends(this.props.match.params.symbol.toLowerCase()).then(response => {
 			const yearsDividends = response.data.filter((dividend) => dividend.exDate.search(new Date().getFullYear()) !== -1);
-			const dividendPayout = (response.data.length > 0) ? yearsDividends.reduce((previousValue, currentValue) => previousValue.amount + currentValue.amount) : 0;
+			const dividendPayout = (yearsDividends.length > 0) ? yearsDividends.reduce((previousValue, currentValue) => previousValue.amount + currentValue.amount) : 0;
 			const currency = (response.data[0] !== undefined) ? response.data[0].currency : '';
 			
 			this.setState({
@@ -53,7 +53,9 @@ class Stock extends React.Component {
 		});
 
 		Database.getShares(this.props.match.params.symbol).then(response => {
-			const totalNumberofShares = (response.length > 0) ? response.reduce((previousValue, currentValue) => previousValue.amount + currentValue.amount) : 0;
+			const totalNumberofShares = response.map((share) => share.amount).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+			console.log('TNS', totalNumberofShares);
+			// const totalNumberofShares = (response.length > 0) ? response.reduce((previousValue, currentValue) => previousValue.amount + currentValue.amount) : 0;
 
 			this.setState({
 				shares: response,
