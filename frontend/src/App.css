@@ -323,12 +323,20 @@ body {
 	border-left: 1px solid #dfe6e9;
 }
 
+.MonthsContainer > .Row > .MonthContainer > .Bottom > .Total {
+	background: #27AE60;
+    padding: 0.35em;
+    color: #F2F2F2;
+    font-size: 0.75em;
+	border-radius: 0.5em;
+}
 .MonthsContainer > .Row > .MonthContainer > .Bottom > .Title {
 	display: flex;
 	align-self: flex-end;
 	color: #27AE60;
 	font-weight: 200;
 	font-size: 1.25em;
+	margin-top: 0.25em;
 }
 
 .MonthContainer .LogoContainer {
