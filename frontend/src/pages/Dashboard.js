@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
 						<Month dividends={this.props.dividendCalendar[5]} monthName="June" />
 					</div>
 					<div className="Row">
-						<div className="TotalPayoutContainer"><span className="Pound">£</span><span className="TotalPayout">{this.props.totalDividendPayout}</span><span className="Year">/year</span></div>
+						<div className="TotalPayoutContainer"><span className="Pound">£</span><span className="TotalPayout">{Number.parseFloat(this.props.totalDividendPayout).toFixed(2)}</span><span className="Year">/year</span></div>
 					</div>
 					<div className="Row">
 						<Month dividends={this.props.dividendCalendar[6]} monthName="July" />
