@@ -18,6 +18,7 @@ import AddStockOverview from './pages/AddStockOverview';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Database from './api/Database';
 import EditShares from './pages/EditShares';
+import update from 'immutability-helper';
 
 library.add(faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit);
 
@@ -84,6 +85,26 @@ class App extends React.Component {
 		});
 	}
 
+	addShares(shares) {
+		this.setState((prevState) => update(prevState, {
+			userStocks: {
+				$push: [shares],
+			}
+		}));
+
+		this.getDashboard(this.state.userStocks);
+	}
+
+	updateShares(shares) {
+
+		this.getDashboard(this.state.userStocks);
+	}
+
+	removeShares(id) {
+
+		this.getDashboard(this.state.userStocks);
+	}
+
 	render() {
 		return (
 			<Router>
@@ -96,8 +117,8 @@ class App extends React.Component {
 						<Route path="/add-stock/:symbol" render={props => <AddStockAmount {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-price/:symbol" render={props => <AddStockPrice {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} />} />
-						<Route path="/add-stock-overview/:symbol" render={props => <AddStockOverview {...props} stocks={this.state.allStocks} />} />
-						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} />} />
+						<Route path="/add-stock-overview/:symbol" render={props => <AddStockOverview {...props} stocks={this.state.allStocks} addShares={this.addShares.bind(this)} />} />
+						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} updateShares={this.updateShares.bind(this)} removeShares={this.removeShares.bind(this)} />} />
 					</div>
 				</div>
 			</Router>

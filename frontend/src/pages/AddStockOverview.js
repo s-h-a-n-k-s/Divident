@@ -34,7 +34,8 @@ class AddStockOverview extends React.Component {
 		Database.addShares(this.state.companyName, this.props.match.params.symbol, this.props.location.state.amount, this.props.location.state.price, this.props.location.state.date)
 		.then(response => {
 			if (response.status === 200) {
-				alert("Shares added.");
+				this.props.addShares(response.data);
+				this.props.history.push(`/stock/${this.props.match.params.symbol}`);
 			}
 		});
 	}
