@@ -4,6 +4,7 @@ import IEX from '../api/IEX';
 import { Link } from 'react-router-dom';
 import Routes from '../constants/Routes';
 import CurrencyInput from 'react-currency-input';
+import Database from '../api/Database';
 
 class AddStockDate extends React.Component {
 	constructor(props) {
@@ -17,6 +18,8 @@ class AddStockDate extends React.Component {
 			logo: '',
 			date: '',
 		}
+
+		this.addShares = this.addShares.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,6 +28,16 @@ class AddStockDate extends React.Component {
 		this.setState({
 			companyName: companyName,
 			logo: logo,
+		});
+	}
+
+	addShares() {
+		Database.addShares(this.state.companyName, this.props.match.params.symbol, this.props.location.state.amount, this.props.location.state.price, this.state.date)
+		.then(response => {
+			if (response.status === 200) {
+				this.props.addShares(response.data);
+				this.props.history.push(`/stock/${this.props.match.params.symbol}`);
+			}
 		});
 	}
 
@@ -40,18 +53,7 @@ class AddStockDate extends React.Component {
 					<h2>Add Date</h2>
 					<input type='date' className="DateInputBox" value={this.state.date} onChange={(event) => this.setState({ date: event.target.value })} />
 					<br />
-					<Link to={{
-						pathname: `/add-stock-overview/${this.props.match.params.symbol}`,
-						state: {
-							companyName: this.state.companyName,
-							logo: this.state.logo,
-							amount: this.props.location.state.amount,
-							price: this.props.location.state.price,
-							date: this.state.date,
-						}
-					}}>
-						<button className="CallToAction" style={{marginTop: '2em'}}>Next</button>
-					</Link>
+					<button className="CallToAction" onClick={this.addShares} style={{marginTop: '2em'}}>Save</button>
 				</div>
 			</div>
 		)
