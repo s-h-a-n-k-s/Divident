@@ -1,8 +1,8 @@
 import React from 'react';
 import '../App.css';
-import SearchBar from '../SearchBar';
+import SearchBar from '../components/SearchBar';
 import IEX from '../api/IEX';
-import SearchResults from '../SearchResults';
+import SearchResults from '../components/SearchResults';
 
 class Search extends React.Component {
 	constructor(props) {

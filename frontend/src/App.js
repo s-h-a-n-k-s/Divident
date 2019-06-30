@@ -2,10 +2,8 @@ import React from 'react';
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit } from '@fortawesome/free-solid-svg-icons'
-import SearchBar from './SearchBar';
 import IEX from './api/IEX';
-import SearchResults from './SearchResults';
-import Sidebar from './Sidebar';
+import Sidebar from './components/Sidebar';
 import Routes from './constants/Routes';
 import Dashboard from './pages/Dashboard';
 import Search from './pages/Search';

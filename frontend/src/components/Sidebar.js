@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Routes from './constants/Routes';
+import Routes from '../constants/Routes';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default function Sidebar(props) {
