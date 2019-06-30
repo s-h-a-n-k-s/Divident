@@ -96,7 +96,16 @@ class App extends React.Component {
 	}
 
 	updateShares(shares) {
+		const index = this.state.userStocks.findIndex(stock => stock.id === shares.id);
 
+		this.setState((prevState) => update(prevState, {
+			userStocks: {
+				[index]: {
+					$set: shares,
+				}
+			}
+		}));
+		
 		this.getDashboard(this.state.userStocks);
 	}
 

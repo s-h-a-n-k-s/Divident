@@ -39,6 +39,7 @@ class EditShares extends React.Component {
 
 	saveChanges() {
 		Database.updateShares(this.props.match.params.id, this.state.amount, this.state.price, this.state.date).then(response => {
+			this.props.updateShares(response);
 			this.props.history.push(`/stock/${this.props.match.params.symbol}`);
 		});
 	}
