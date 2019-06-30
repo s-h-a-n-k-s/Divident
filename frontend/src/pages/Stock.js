@@ -159,7 +159,7 @@ class Stock extends React.Component {
 									<div className="DividendContainer">
 										<div className="Amount">{value.amount} <small>shares</small></div>
 										<div className="Dates">
-											<div className="PricePaid">Price: £{value.purchasePrice} (per share)</div>
+											<div className="PricePaid">Price: £{Number.parseFloat(value.purchasePrice).toFixed(2)} (per share)</div>
 											<div className="PurchaseDate">Purchase date: {value.purchaseDate}</div>
 										</div>
 										<Link to={{
