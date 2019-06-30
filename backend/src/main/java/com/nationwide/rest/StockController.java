@@ -34,12 +34,12 @@ public class StockController {
 	}
 
 	@RequestMapping(value = Constants.STOCK, method = RequestMethod.POST)
-	public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
-		return ResponseEntity.ok(stockService.addStock(stock));
+	public ResponseEntity<Stock> addShares(@RequestBody Stock stock) {
+		return ResponseEntity.ok(stockService.addShares(stock));
 	}
 
 	@RequestMapping(value = Constants.SHARES_WITH_ID, method = RequestMethod.PUT)
-	public ResponseEntity<Stock> updateStock(@PathVariable Long id, @RequestBody Stock stock) {
+	public ResponseEntity<Stock> updateShares(@PathVariable Long id, @RequestBody Stock stock) {
 		return ResponseEntity.ok(stockService.updateShares(id, stock));
 	}
 }

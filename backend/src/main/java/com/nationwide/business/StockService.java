@@ -18,11 +18,11 @@ public class StockService {
 		return stockRepository.findAll();
 	}
 
-	public void deleteStock(Long id) {
+	public void deleteShares(Long id) {
 		stockRepository.deleteById(id);
 	}
 
-	public Stock addStock(Stock stock) {
+	public Stock addShares(Stock stock) {
 		return stockRepository.save(stock);
 	}
 
