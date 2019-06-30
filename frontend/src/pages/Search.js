@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import EmptyState from '../EmptyState';
 import SearchBar from '../SearchBar';
 import IEX from '../api/IEX';
 import SearchResults from '../SearchResults';

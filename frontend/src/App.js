@@ -5,7 +5,6 @@ import { faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit } from '@fortawe
 import SearchBar from './SearchBar';
 import IEX from './api/IEX';
 import SearchResults from './SearchResults';
-import EmptyState from './EmptyState';
 import Sidebar from './Sidebar';
 import Routes from './constants/Routes';
 import Dashboard from './pages/Dashboard';

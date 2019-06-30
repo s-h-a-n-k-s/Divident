@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import EmptyState from '../EmptyState';
+import DashboardEmptyState from '../components/DashboardEmptyState';
 import Month from '../components/Month';
 
 class Dashboard extends React.Component {
@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
 	render() {
 		if (this.props.userStocks.length == 0) {
 			return (
-				<EmptyState />
+				<DashboardEmptyState />
 			);
 		} else {
 			return (
