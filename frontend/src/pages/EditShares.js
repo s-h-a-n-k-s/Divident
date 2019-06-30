@@ -34,7 +34,7 @@ class EditShares extends React.Component {
 		});
 
 		this.saveChanges = this.saveChanges.bind(this);
-		this.deleteShares = this.deleteShares.bind(this);
+		this.delete = this.delete.bind(this);
 	}
 
 	saveChanges() {
@@ -43,8 +43,10 @@ class EditShares extends React.Component {
 		});
 	}
 	
-	deleteShares() {
-		alert('deleted');
+	delete() {
+		Database.deleteShares(this.props.match.params.id).then(response => {
+			this.props.history.push(`/stock/${this.props.match.params.symbol}`);
+		});
 	}
 
 	render() {
@@ -69,7 +71,7 @@ class EditShares extends React.Component {
 					<button className="CallToAction" style={{marginTop: '2em'}} onClick={this.saveChanges}>Save</button>
 					<br />
 					<br />
-					<button onClick={this.deleteShares} className="DeleteSharesLink">Delete Shares</button>
+					<button onClick={this.delete} className="DeleteSharesLink">Delete Shares</button>
 				</div>
 			</div>
 		)

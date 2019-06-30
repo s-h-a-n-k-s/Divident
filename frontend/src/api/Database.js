@@ -43,9 +43,18 @@ const updateShares = (id, amount, purchasePrice, purchaseDate) => axios.put(`htt
 	return error;
 });
 
+const deleteShares = (id) => axios.delete(`http://localhost:8080/shares/${id}`)
+.then(response => {
+	return response.data;
+})
+.catch(error => {
+	return error;
+});
+
 export default {
 	getAllStocks,
 	addShares,
 	getShares,
-	updateShares
+	updateShares,
+	deleteShares
 };

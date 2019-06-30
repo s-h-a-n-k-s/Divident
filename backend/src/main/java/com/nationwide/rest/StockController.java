@@ -42,4 +42,10 @@ public class StockController {
 	public ResponseEntity<Stock> updateShares(@PathVariable Long id, @RequestBody Stock stock) {
 		return ResponseEntity.ok(stockService.updateShares(id, stock));
 	}
+
+	@RequestMapping(value = Constants.SHARES_WITH_ID, method = RequestMethod.DELETE)
+	public ResponseEntity deleteShares(@PathVariable Long id) {
+		stockService.deleteShares(id);
+		return ResponseEntity.ok().body("{'success': true}");
+	}
 }
