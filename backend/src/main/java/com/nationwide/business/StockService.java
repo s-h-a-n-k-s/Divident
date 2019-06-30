@@ -26,6 +26,16 @@ public class StockService {
 		return stockRepository.save(stock);
 	}
 
+	public Stock updateShares(Long id, Stock stock) {
+		Stock databaseStock = stockRepository.findById(id).get();
+
+		databaseStock.setAmount(stock.getAmount());
+		databaseStock.setPurchasePrice(stock.getPurchasePrice());
+		databaseStock.setPurchaseDate(stock.getPurchaseDate());
+		
+		return stockRepository.save(databaseStock);
+	}
+
 	public List<Stock> getShares(String symbol) {
 		return stockRepository.findAllByTickerSymbol(symbol);
 	}

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMoneyBillWave, faIndustry, faLink, faUserTie } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit } from '@fortawesome/free-solid-svg-icons'
 import SearchBar from './SearchBar';
 import IEX from './api/IEX';
 import SearchResults from './SearchResults';
@@ -17,8 +17,9 @@ import AddStockDate from './pages/AddStockDate';
 import AddStockOverview from './pages/AddStockOverview';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Database from './api/Database';
+import EditShares from './pages/EditShares';
 
-library.add(faMoneyBillWave, faIndustry, faLink, faUserTie);
+library.add(faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit);
 
 class App extends React.Component {
 	constructor(props) {
@@ -96,6 +97,7 @@ class App extends React.Component {
 						<Route path="/add-stock-price/:symbol" render={props => <AddStockPrice {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-overview/:symbol" render={props => <AddStockOverview {...props} stocks={this.state.allStocks} />} />
+						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} />} />
 					</div>
 				</div>
 			</Router>

@@ -28,7 +28,7 @@ public class StockController {
 		return ResponseEntity.ok(stockService.getStocks());
 	}
 
-	@GetMapping(path = Constants.SHARES_WITH_PARAM)
+	@GetMapping(path = Constants.SHARES_WITH_SYMBOL)
 	public ResponseEntity<List<Stock>> getStock(@PathVariable("symbol") String symbol) {
 		return ResponseEntity.ok(stockService.getShares(symbol));
 	}
@@ -36,5 +36,10 @@ public class StockController {
 	@RequestMapping(value = Constants.STOCK, method = RequestMethod.POST)
 	public ResponseEntity<Stock> createStock(@RequestBody Stock stock) {
 		return ResponseEntity.ok(stockService.addStock(stock));
+	}
+
+	@RequestMapping(value = Constants.SHARES_WITH_ID, method = RequestMethod.PUT)
+	public ResponseEntity<Stock> updateStock(@PathVariable Long id, @RequestBody Stock stock) {
+		return ResponseEntity.ok(stockService.updateShares(id, stock));
 	}
 }

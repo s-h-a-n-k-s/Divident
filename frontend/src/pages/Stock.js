@@ -162,6 +162,18 @@ class Stock extends React.Component {
 											<div className="PricePaid">Price: £{value.purchasePrice} (per share)</div>
 											<div className="PurchaseDate">Purchase date: {value.purchaseDate}</div>
 										</div>
+										<Link to={{
+											pathname: `/edit-shares/${this.props.match.params.symbol}/${value.id}`,
+											state: {
+												companyName: this.state.companyName,
+												logo: Routes.API_STOCK_LOGO(this.props.match.params.symbol),
+												amount: value.amount,
+												price: value.purchasePrice,
+												date: value.purchaseDate
+											}
+										}}>
+											<FontAwesomeIcon icon="edit" className="EditLink" />
+										</Link>
 									</div>
 								)
 							})}

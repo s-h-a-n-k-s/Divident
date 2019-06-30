@@ -31,8 +31,21 @@ const getShares = (tickerSymbol) => axios.get(`http://localhost:8080/shares/${ti
 	return error;
 });
 
+const updateShares = (id, amount, purchasePrice, purchaseDate) => axios.put(`http://localhost:8080/shares/${id}`, {
+	amount: amount,
+	purchasePrice: purchasePrice,
+	purchaseDate: purchaseDate
+})
+.then(response => {
+	return response.data;
+})
+.catch(error => {
+	return error;
+});
+
 export default {
 	getAllStocks,
 	addShares,
-	getShares
+	getShares,
+	updateShares
 };

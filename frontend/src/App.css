@@ -206,6 +206,14 @@ body {
 	margin-right: 1em;
 }
 
+.DividendContainer > .Dates {
+	margin-right: 1em;
+}
+
+.DividendContainer .EditLink {
+	color: #2d3436;
+}
+
 .InputBox {
 	height: 2.5em;
 	border: 0;
@@ -214,12 +222,29 @@ body {
 	width: 30%;
 }
 
+.EditInputBox {
+	border: 0;
+	font-size: 2.5em;
+	text-align: center;
+	width: 40%;
+	padding: 0.35em;
+}
+
 .DateInputBox {
 	height: 2.5em;
 	border: 0;
 	font-size: 5em;
 	text-align: center;
 	width: 50%;
+}
+
+.DeleteSharesLink {
+	text-decoration: none;
+	color: #ff4d4d;
+	border: 0;
+	background: #F2F2F2;
+	font-size: 1em;
+	cursor: pointer;
 }
 
 .InvestmentEmptyState {
