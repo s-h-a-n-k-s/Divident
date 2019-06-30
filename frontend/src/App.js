@@ -110,6 +110,11 @@ class App extends React.Component {
 	}
 
 	removeShares(id) {
+		const index = this.state.userStocks.findIndex(stock => stock.id === id);
+		
+		this.setState(prevState => ({
+			userStocks: update(prevState.userStocks, {$splice: [[index, 1]]})
+		}));
 
 		this.getDashboard(this.state.userStocks);
 	}

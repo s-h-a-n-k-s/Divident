@@ -46,6 +46,7 @@ class EditShares extends React.Component {
 	
 	delete() {
 		Database.deleteShares(this.props.match.params.id).then(response => {
+			this.props.removeShares(this.props.match.params.id);
 			this.props.history.push(`/stock/${this.props.match.params.symbol}`);
 		});
 	}
