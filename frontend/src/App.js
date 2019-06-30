@@ -55,34 +55,36 @@ class App extends React.Component {
 	}
 
 	getDashboard(userStocks) {
-		const tickerSymbols = userStocks.map((stock) => stock.tickerSymbol).filter((v, i, a) => a.indexOf(v) === i);
-		let dividendCalendar = Array(12).fill([]);
-		let totalDividendPayout = 0;
-		IEX.getMultipleCompanyDividends(tickerSymbols.join()).then(response => {
-			for (const item in response.data) {
-				const stock = response.data[item];
-				const yearsDividends = stock.dividends.filter((dividend) => dividend.paymentDate.search(new Date().getFullYear()) !== -1);
-				
-				if (yearsDividends.length > 0) {
-					yearsDividends.forEach((dividend) => {
-						const shares = userStocks.filter(value => value.tickerSymbol.toLowerCase().search(item.toLowerCase()) !== -1);
-						const sharesCount = shares.map((share) => share.amount).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-						const dividendObject = {companyName: stock.company.companyName, logo: stock.logo.url, sharesCount: sharesCount, paymentDate: dividend.paymentDate, declaredDate: dividend.declaredDate, amount: dividend.amount, currency: dividend.currency};
-						const x = new Date(dividendObject.paymentDate).getMonth();
-						
-						dividendCalendar[x] = dividendCalendar[x].concat([dividendObject]);
-						shares.forEach(share => totalDividendPayout += (share.amount * dividend.amount));
-					});
+		if (userStocks.length > 0) {
+			const tickerSymbols = userStocks.map((stock) => stock.tickerSymbol).filter((v, i, a) => a.indexOf(v) === i);
+			let dividendCalendar = Array(12).fill([]);
+			let totalDividendPayout = 0;
+			IEX.getMultipleCompanyDividends(tickerSymbols.join()).then(response => {
+				for (const item in response.data) {
+					const stock = response.data[item];
+					const yearsDividends = stock.dividends.filter((dividend) => dividend.paymentDate.search(new Date().getFullYear()) !== -1);
+					
+					if (yearsDividends.length > 0) {
+						yearsDividends.forEach((dividend) => {
+							const shares = userStocks.filter(value => value.tickerSymbol.toLowerCase().search(item.toLowerCase()) !== -1);
+							const sharesCount = shares.map((share) => share.amount).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+							const dividendObject = {companyName: stock.company.companyName, logo: stock.logo.url, sharesCount: sharesCount, paymentDate: dividend.paymentDate, declaredDate: dividend.declaredDate, amount: dividend.amount, currency: dividend.currency};
+							const x = new Date(dividendObject.paymentDate).getMonth();
+							
+							dividendCalendar[x] = dividendCalendar[x].concat([dividendObject]);
+							shares.forEach(share => totalDividendPayout += (share.amount * dividend.amount));
+						});
+					}
 				}
-			}
 
-			console.log('TDP', totalDividendPayout);
+				console.log('TDP', totalDividendPayout);
 
-			this.setState({
-				dividendCalendar: dividendCalendar,
-				totalDividendPayout: totalDividendPayout
+				this.setState({
+					dividendCalendar: dividendCalendar,
+					totalDividendPayout: totalDividendPayout
+				});
 			});
-		});
+		}
 	}
 
 	addShares(shares) {
