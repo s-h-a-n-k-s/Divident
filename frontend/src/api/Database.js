@@ -1,7 +1,7 @@
 import axios from "axios";
 import routes from '../constants/Routes';
 
-const getAllStocks = () => axios.get('http://localhost:8080/stocks')
+const getAllStocks = () => axios.get(routes.DATABASE_ALL_STOCKS)
 .then(response => {
 	return response;
 })
@@ -9,7 +9,7 @@ const getAllStocks = () => axios.get('http://localhost:8080/stocks')
 	return error.response;
 });
 
-const addShares = (companyName, tickerSymbol, amount, purchasePrice, purchaseDate) => axios.post('http://localhost:8080/stock', {
+const addShares = (companyName, tickerSymbol, amount, purchasePrice, purchaseDate) => axios.post(routes.DATABASE_STOCK, {
 	companyName: companyName,
 	tickerSymbol: tickerSymbol,
 	amount: amount,
@@ -23,7 +23,7 @@ const addShares = (companyName, tickerSymbol, amount, purchasePrice, purchaseDat
 	return error.response;
 });
 
-const getShares = (tickerSymbol) => axios.get(`http://localhost:8080/shares/${tickerSymbol}`)
+const getShares = (tickerSymbol) => axios.get(routes.DATABASE_SHARES(tickerSymbol))
 .then(response => {
 	return response.data;
 })
@@ -31,7 +31,7 @@ const getShares = (tickerSymbol) => axios.get(`http://localhost:8080/shares/${ti
 	return error;
 });
 
-const updateShares = (id, amount, purchasePrice, purchaseDate) => axios.put(`http://localhost:8080/shares/${id}`, {
+const updateShares = (id, amount, purchasePrice, purchaseDate) => axios.put(routes.DATABASE_SHARES_ID(id), {
 	amount: amount,
 	purchasePrice: purchasePrice,
 	purchaseDate: purchaseDate
@@ -43,7 +43,7 @@ const updateShares = (id, amount, purchasePrice, purchaseDate) => axios.put(`htt
 	return error;
 });
 
-const deleteShares = (id) => axios.delete(`http://localhost:8080/shares/${id}`)
+const deleteShares = (id) => axios.delete(routes.DATABASE_SHARES_ID(id))
 .then(response => {
 	return response.data;
 })
