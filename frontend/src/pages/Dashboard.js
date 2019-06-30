@@ -4,12 +4,8 @@ import DashboardEmptyState from '../components/DashboardEmptyState';
 import Month from '../components/Month';
 
 class Dashboard extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
-		if (this.props.userStocks.length == 0) {
+		if (this.props.userStocks.length === 0) {
 			return (
 				<DashboardEmptyState />
 			);

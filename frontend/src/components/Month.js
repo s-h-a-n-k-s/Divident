@@ -5,7 +5,7 @@ export default function Month(props) {
 	return (
 		<div className="MonthContainer">
 			<div className="Top">
-				<div className="DividendCount">{props.dividends.length} DIVIDEND{(props.dividends.length == 0 || props.dividends.length > 1) ? "S" : ""}</div>
+				<div className="DividendCount">{props.dividends.length} DIVIDEND{(props.dividends.length === 0 || props.dividends.length > 1) ? "S" : ""}</div>
 			</div>
 			<div className="Middle">
 			{props.dividends.length > 0 ? (

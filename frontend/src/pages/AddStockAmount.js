@@ -1,8 +1,6 @@
 import React from 'react';
 import '../App.css';
-import IEX from '../api/IEX';
 import { Link } from 'react-router-dom';
-import Routes from '../constants/Routes';
 
 class AddStockAmount extends React.Component {
 	constructor(props) {

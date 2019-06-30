@@ -4,14 +4,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit } from '@fortawesome/free-solid-svg-icons'
 import IEX from './api/IEX';
 import Sidebar from './components/Sidebar';
-import Routes from './constants/Routes';
 import Dashboard from './pages/Dashboard';
 import Search from './pages/Search';
 import Stock from './pages/Stock';
 import AddStockAmount from './pages/AddStockAmount';
 import AddStockPrice from './pages/AddStockPrice';
 import AddStockDate from './pages/AddStockDate';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Database from './api/Database';
 import EditShares from './pages/EditShares';
 import update from 'immutability-helper';

@@ -1,9 +1,5 @@
 import React from 'react';
 import '../App.css';
-import IEX from '../api/IEX';
-import { Link } from 'react-router-dom';
-import Routes from '../constants/Routes';
-import CurrencyInput from 'react-currency-input';
 import Database from '../api/Database';
 
 class AddStockDate extends React.Component {

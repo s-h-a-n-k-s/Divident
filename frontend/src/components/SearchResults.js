@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
 import SearchResult from './SearchResult';
-import { Link } from 'react-router-dom';
 
 export default function SearchResults(props) {
 	return (
