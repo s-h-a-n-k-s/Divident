@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Database from './api/Database';
 import EditShares from './pages/EditShares';
 import update from 'immutability-helper';
+import ManageStocks from './pages/ManageStocks';
 
 library.add(faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit);
 
@@ -129,6 +130,7 @@ class App extends React.Component {
 						<Route path="/add-stock-price/:symbol" render={props => <AddStockPrice {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} addShares={this.addShares.bind(this)} />} />
 						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} updateShares={this.updateShares.bind(this)} removeShares={this.removeShares.bind(this)} />} />
+						<Route path="/manage-stocks" render={props => <ManageStocks {...props} userStocks={this.state.userStocks} />} />
 					</div>
 				</div>
 			</Router>
