@@ -65,9 +65,9 @@ class App extends React.Component {
 							const shares = userStocks.filter(value => value.tickerSymbol.toLowerCase().search(item.toLowerCase()) !== -1);
 							const sharesCount = shares.map((share) => share.amount).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 							const dividendObject = {companyName: stock.company.companyName, logo: stock.logo.url, sharesCount: sharesCount, paymentDate: dividend.paymentDate, declaredDate: dividend.declaredDate, amount: dividend.amount, currency: dividend.currency};
-							const x = new Date(dividendObject.paymentDate).getMonth();
+							const month = new Date(dividendObject.paymentDate).getMonth();
 							
-							dividendCalendar[x] = dividendCalendar[x].concat([dividendObject]);
+							dividendCalendar[month] = dividendCalendar[month].concat([dividendObject]);
 							shares.forEach(share => totalDividendPayout += (share.amount * dividend.amount));
 						});
 					}
