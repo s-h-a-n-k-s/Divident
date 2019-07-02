@@ -28,9 +28,12 @@ class App extends React.Component {
 			page: window.location.pathname,
 			dividendCalendar: Array(12).fill([]),
 			totalDividendPayout: 0,
+			sortedStocks: Array(26).fill([]),
+			stocksCount: 0,
 		}
 
 		this.getDashboard = this.getDashboard.bind(this);
+		this.getManageStocks = this.getManageStocks.bind(this);
 	}
 
 	componentDidMount() {
@@ -46,6 +49,7 @@ class App extends React.Component {
 			});
 			
 			this.getDashboard(response.data);
+			this.getManageStocks(response.data);
 
 		});
 	}
@@ -55,6 +59,7 @@ class App extends React.Component {
 			const tickerSymbols = userStocks.map((stock) => stock.tickerSymbol).filter((v, i, a) => a.indexOf(v) === i);
 			let dividendCalendar = Array(12).fill([]);
 			let totalDividendPayout = 0;
+
 			IEX.getMultipleCompanyDividends(tickerSymbols.join()).then(response => {
 				for (const item in response.data) {
 					const stock = response.data[item];
@@ -73,14 +78,27 @@ class App extends React.Component {
 					}
 				}
 
-				console.log('TDP', totalDividendPayout);
-
 				this.setState({
 					dividendCalendar: dividendCalendar,
 					totalDividendPayout: totalDividendPayout
 				});
 			});
 		}
+	}
+
+	getManageStocks(userStocks) {
+		const stocksWithoutDuplicates = Array.from(new Set(userStocks.map(a => a.tickerSymbol))).map(tickerSymbol => userStocks.find(a => a.tickerSymbol === tickerSymbol))
+		let alphabeticallySortedStocks = this.state.sortedStocks;
+
+		for (let index = 0; index < 26; index++) {
+			const character = String.fromCharCode(65 + index);
+			alphabeticallySortedStocks[index] = alphabeticallySortedStocks[index].concat(stocksWithoutDuplicates.filter(value => value.companyName.toUpperCase().startsWith(character)));
+		}
+
+		this.setState({
+			sortedStocks: alphabeticallySortedStocks,
+			stocksCount: stocksWithoutDuplicates.length,
+		});
 	}
 
 	addShares(shares) {
@@ -91,6 +109,7 @@ class App extends React.Component {
 		}));
 
 		this.getDashboard(this.state.userStocks);
+		this.getManageStocks(this.state.userStocks);
 	}
 
 	updateShares(shares) {
@@ -105,6 +124,7 @@ class App extends React.Component {
 		}));
 		
 		this.getDashboard(this.state.userStocks);
+		this.getManageStocks(this.state.userStocks);
 	}
 
 	removeShares(id) {
@@ -115,6 +135,7 @@ class App extends React.Component {
 		}));
 
 		this.getDashboard(this.state.userStocks);
+		this.getManageStocks(this.state.userStocks);
 	}
 
 	render() {
@@ -130,7 +151,7 @@ class App extends React.Component {
 						<Route path="/add-stock-price/:symbol" render={props => <AddStockPrice {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} addShares={this.addShares.bind(this)} />} />
 						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} updateShares={this.updateShares.bind(this)} removeShares={this.removeShares.bind(this)} />} />
-						<Route path="/manage-stocks" render={props => <ManageStocks {...props} userStocks={this.state.userStocks} />} />
+						<Route path="/manage-stocks" render={props => <ManageStocks {...props} sortedStocks={this.state.sortedStocks} stocksCount={this.state.stocksCount} />} />
 					</div>
 				</div>
 			</Router>
