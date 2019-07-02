@@ -20,7 +20,7 @@ class Search extends React.Component {
 			searchResults: [],
 		});
 
-		if (event.target.value.length > 2) {
+		if (event.target.value.length > 1) {
 			const searchResults = IEX.search(this.props.stocks, event.target.value);
 
 			this.setState({
