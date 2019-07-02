@@ -135,7 +135,7 @@ class Stock extends React.Component {
 					<div className="Columns">
 						<div className="Column">
 							<h2 className="Title">Dividends</h2>
-							{ this.state.dividends === 0 ? (
+							{ this.state.dividends == 0 ? (
 								<DividendsEmptyState companyName={this.state.companyName} />
 							) : this.state.dividends.map(value => {
 								return (
@@ -152,7 +152,7 @@ class Stock extends React.Component {
 
 						<div className="Column">
 							<h2 className="Title">Your Investments</h2>
-							{ this.state.shares.length === 0 ? (
+							{ this.state.shares.length == 0 ? (
 								<InvestmentsEmptyState companyName={this.state.companyName} symbol={this.props.match.params.symbol} logo={Routes.API_STOCK_LOGO(this.props.match.params.symbol)} />
 							) : this.state.shares.map(value => {
 								return (
