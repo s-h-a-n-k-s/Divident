@@ -3,9 +3,14 @@ import '../App.css';
 import ManageStocksResult from '../components/ManageStocksResult';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import ManageStocksEmptyState from '../components/ManageStocksEmptyState';
 
 class ManageStocks extends React.Component {
 	render() {
+		if (this.props.stocksCount == 0) {
+			return <ManageStocksEmptyState />
+		}
+		
 		return (
 			<div className="MangeStocksWrapper">
 				<div className="ManageStocksContent">
