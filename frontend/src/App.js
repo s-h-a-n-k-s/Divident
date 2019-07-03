@@ -93,7 +93,7 @@ class App extends React.Component {
 
 	getManageStocks(userStocks) {
 		const stocksWithoutDuplicates = Array.from(new Set(userStocks.map(a => a.tickerSymbol))).map(tickerSymbol => userStocks.find(a => a.tickerSymbol === tickerSymbol))
-		let alphabeticallySortedStocks = this.state.sortedStocks;
+		let alphabeticallySortedStocks = Array(26).fill([]);
 
 		for (let index = 0; index < 26; index++) {
 			const character = String.fromCharCode(65 + index);
