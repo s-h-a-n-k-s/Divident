@@ -3,6 +3,7 @@ import '../App.css';
 import SearchBar from '../components/SearchBar';
 import IEX from '../api/IEX';
 import SearchResults from '../components/SearchResults';
+import SearchEmptyState from '../components/SearchEmptyState';
 
 class Search extends React.Component {
 	constructor(props) {
@@ -38,6 +39,9 @@ class Search extends React.Component {
 			<div>
 				<SearchBar value={this.state.searchBarValue} handleChange={this.handleSearchBarChange.bind(this)} />
 				<SearchResults results={this.state.searchResults} />
+				{ this.state.searchResults == 0 &&
+					<SearchEmptyState />
+				}
 			</div>
 		);
 	}
