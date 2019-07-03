@@ -37,6 +37,7 @@ class EditShares extends React.Component {
 	saveChanges() {
 		Database.updateShares(this.props.match.params.id, this.state.amount, this.state.price, this.state.date).then(response => {
 			this.props.updateShares(response);
+			this.props.sendNotification("Edit Successful", `Your shares in ${this.state.companyName} have been successfully edited.`);
 			this.props.history.push(`/stock/${this.props.match.params.symbol}`);
 		});
 	}
@@ -44,6 +45,7 @@ class EditShares extends React.Component {
 	delete() {
 		Database.deleteShares(this.props.match.params.id).then(response => {
 			this.props.removeShares(this.props.match.params.id);
+			this.props.sendNotification("Delete Successful", `Your shares in ${this.state.companyName} have been successfully deleted.`);
 			this.props.history.push(`/stock/${this.props.match.params.symbol}`);
 		});
 	}

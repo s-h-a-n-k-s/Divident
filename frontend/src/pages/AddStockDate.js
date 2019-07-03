@@ -32,6 +32,7 @@ class AddStockDate extends React.Component {
 		.then(response => {
 			if (response.status === 200) {
 				this.props.addShares(response.data);
+				this.props.sendNotification("Stocks Successfully Added", `Your shares in ${this.state.companyName} have been successfully added.`);
 				this.props.history.push(`/stock/${this.props.match.params.symbol}`);
 			}
 		});

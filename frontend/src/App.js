@@ -15,6 +15,8 @@ import Database from './api/Database';
 import EditShares from './pages/EditShares';
 import update from 'immutability-helper';
 import ManageStocks from './pages/ManageStocks';
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 library.add(faMoneyBillWave, faIndustry, faLink, faUserTie, faEdit);
 
@@ -34,6 +36,9 @@ class App extends React.Component {
 
 		this.getDashboard = this.getDashboard.bind(this);
 		this.getManageStocks = this.getManageStocks.bind(this);
+
+		this.addNotification = this.addNotification.bind(this);
+		this.notificationDOMRef = React.createRef();
 	}
 
 	componentDidMount() {
@@ -138,6 +143,20 @@ class App extends React.Component {
 		this.getManageStocks(this.state.userStocks);
 	}
 
+	addNotification(title, message) {
+		this.notificationDOMRef.current.addNotification({
+			title: title,
+			message: message,
+			type: "success",
+			insert: "top",
+			container: "top-right",
+			animationIn: ["animated", "fadeIn"],
+			animationOut: ["animated", "fadeOut"],
+			dismiss: { duration: 2000 },
+			dismissable: { click: true }
+		});
+	  }
+
 	render() {
 		return (
 			<Router>
@@ -149,10 +168,11 @@ class App extends React.Component {
 						<Route path="/stock/:symbol" render={props => <Stock {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock/:symbol" render={props => <AddStockAmount {...props} stocks={this.state.allStocks} />} />
 						<Route path="/add-stock-price/:symbol" render={props => <AddStockPrice {...props} stocks={this.state.allStocks} />} />
-						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} addShares={this.addShares.bind(this)} />} />
-						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} updateShares={this.updateShares.bind(this)} removeShares={this.removeShares.bind(this)} />} />
+						<Route path="/add-stock-date/:symbol" render={props => <AddStockDate {...props} stocks={this.state.allStocks} addShares={this.addShares.bind(this)} sendNotification={this.addNotification.bind(this)} />} />
+						<Route path="/edit-shares/:symbol/:id" render={props => <EditShares {...props} stocks={this.state.allStocks} updateShares={this.updateShares.bind(this)} removeShares={this.removeShares.bind(this)} sendNotification={this.addNotification.bind(this)} />} />
 						<Route path="/manage-stocks" render={props => <ManageStocks {...props} sortedStocks={this.state.sortedStocks} stocksCount={this.state.stocksCount} />} />
 					</div>
+					<ReactNotification ref={this.notificationDOMRef} />
 				</div>
 			</Router>
 		);
