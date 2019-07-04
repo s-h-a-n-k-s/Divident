@@ -13,7 +13,7 @@ Running the application
 Step 1:
 Clone the project using the following command:
 ```
-git clone https://github.com/scrappy1987/todo-app.git
+git clone https://github.com/s-h-a-n-k-s/Divident.git
 ```
 Step 2:
 Open a command line window in the "/backend" folder an execute:
