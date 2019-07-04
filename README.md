@@ -21,12 +21,12 @@ Open a command line window in the "/backend" folder an execute:
 mvn clean install
 ```
 Step 3:
-In the command line, cd into the target folder and execute the jar:
+In the command line, cd into the "/target" folder and execute the jar file:
 ```
 java -jar [jar-in-this-folder]
 ```
 Step 4:
-From a browser access the API by executing the following HTTP request:
+From a browser access the API by navigating to:
 http://localhost:8080/stocks
 ```
 The service should return an empty JavaScript array.
@@ -48,7 +48,7 @@ Enter data into the database with the following SQL statement:
 INSERT INTO STOCK (ID, AMOUNT, COMPANY_NAME, PURCHASE_DATE, PURCHASE_PRICE, TICKER_SYMBOL) VALUES (1, 10, 'Apple, Inc.', CURRENT_DATE(), 1.00, 'AAPL')
 ```
 Step 8:
-From a browser access the API by executing the following HTTP request:
+From a browser access the API by navigating to:
 http://localhost:8080/stocks
 ```
 The service should return an array of STOCK objects
