@@ -73,12 +73,26 @@ class App extends React.Component {
 					if (yearsDividends.length > 0) {
 						yearsDividends.forEach((dividend) => {
 							const shares = userStocks.filter(value => value.tickerSymbol.toLowerCase().search(item.toLowerCase()) !== -1);
-							const sharesCount = shares.map((share) => share.amount).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+							const month = new Date(dividend.paymentDate).getMonth()
+							let sharesCount = 0;
+							let addToCalendar = false;
+
+							shares.forEach(share => {
+								const purchaseDate = new Date(share.purchaseDate);
+								const exDate = new Date(dividend.exDate);
+								
+								if (purchaseDate < exDate) {
+									sharesCount += share.amount;
+									addToCalendar = true;
+									totalDividendPayout += (share.amount * dividend.amount)
+								}
+							});
+
 							const dividendObject = {companyName: stock.company.companyName, logo: stock.logo.url, sharesCount: sharesCount, paymentDate: dividend.paymentDate, declaredDate: dividend.declaredDate, amount: dividend.amount, currency: dividend.currency};
-							const month = new Date(dividendObject.paymentDate).getMonth();
-							
-							dividendCalendar[month] = dividendCalendar[month].concat([dividendObject]);
-							shares.forEach(share => totalDividendPayout += (share.amount * dividend.amount));
+
+							if (addToCalendar) {
+								dividendCalendar[month] = dividendCalendar[month].concat([dividendObject]);
+							}
 						});
 					}
 				}
